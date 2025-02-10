@@ -87,3 +87,36 @@ ConfigLike = Union[BaseConfig, BaseModel]
     
 def get_cpu_count() -> int: 
     return int(os.cpu_count())
+
+
+def batch_data(data: list[T], chunk_size: int) -> list[list[T]]:
+    """Batch data into chunks of size chunk_size.
+
+    Parameters
+    ----------
+    data : list[T]
+        The data to batch.
+    chunk_size : int
+        The size of each batch.
+
+    Returns
+    -------
+    list[list[T]]
+        The batched data.
+    """
+    batches = [
+        data[i * chunk_size : (i + 1) * chunk_size]
+        for i in range(0, len(data) // chunk_size)
+    ]
+    if len(data) > chunk_size * len(batches):
+        batches.append(data[len(batches) * chunk_size :])
+    return batches
+
+
+def format_time(seconds: float) -> str:
+    """
+    Converts time in seconds to a human-readable format (HH:MM:SS).
+    """
+    hours, remainder = divmod(seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    return f"{int(hours):02d}:{int(minutes):02d}:{seconds:06.3f}"
