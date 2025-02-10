@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import json
+import json, os
 from pathlib import Path
 from typing import Literal
 from typing import TypeVar
@@ -82,3 +82,8 @@ class BaseConfig(BaseModel):
         with open(path) as fp:
             raw_data = yaml.safe_load(fp)
         return cls(**raw_data)
+    
+ConfigLike = Union[BaseConfig, BaseModel]
+    
+def get_cpu_count() -> int: 
+    return int(os.cpu_count())
