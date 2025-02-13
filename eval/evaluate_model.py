@@ -107,6 +107,9 @@ def parse_arguments():
     argparser.add_argument('--model_name_or_path', type=str, default='unsloth/Qwen2.5-0.5B-Instruct-bnb-4bit')
     argparser.add_argument('--eval_save_dir', type=str, default='/lus/eagle/projects/FoundEpidem/bhsu/2024_research/ml-program-winter-2025/eval/eval_results')
     argparser.add_argument('--merge', type=bool, default=False)
+    argparser.add_argument('--merge_output', 
+                           type=str, 
+                           default='/lus/eagle/projects/FoundEpidem/bhsu/2024_research/ml-program-winter-2025/eval/eval_results/merged.jsonl')
     return argparser.parse_args()
 
 
@@ -130,7 +133,6 @@ TODO: save time of jsonl == ???
 Do batch saving every n steps, then a merge 
 Perhaps run with Qwen 2 or Zephyer
 """
-
 
 def main(): 
     args = parse_arguments()

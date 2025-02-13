@@ -120,3 +120,8 @@ def format_time(seconds: float) -> str:
     hours, remainder = divmod(seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
     return f"{int(hours):02d}:{int(minutes):02d}:{seconds:06.3f}"
+
+def read_jsonl(file_path: str) -> list: 
+    with open(file_path, "r", encoding="utf-8") as f:
+        data = [json.loads(line) for line in f]
+    return data
